@@ -1,0 +1,20 @@
+queue_rules:
+  - name: default
+    max_checks_retries: 3
+    merge_method: squash
+    commit_message_format:
+      title: pr-title
+      body: empty
+pull_request_rules:
+  - name: automatic merge for main when CI passes
+    conditions:
+      - base=main
+      - or:
+          - label=ready-to-merge
+          - label=dependencies
+    actions:
+      queue:
+        name: default
+
+merge_protections_settings:
+  reporting_method: deployments
