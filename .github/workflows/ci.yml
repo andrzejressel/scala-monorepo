@@ -34,9 +34,7 @@ jobs:
         run: ./mill scoverage.scoverage.xmlReportAll
 
       - name: Upload report to Codecov
-        if: ${{ secrets.CODECOV_TOKEN != '' }}
         uses: codecov/codecov-action@v5
         with:
-          files: out/scoverage/scoverage/xmlReportAll.dest/scoverage.xml
+          files: out/scoverage/xmlReportAll.dest/scoverage.xml
           fail_ci_if_error: true
-          token: ${{ secrets.CODECOV_TOKEN }}
