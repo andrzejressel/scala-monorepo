@@ -22,7 +22,7 @@ jobs:
         run: ./mill __.test
 
       - name: Generate aggregated scoverage XML report
-        run: ./mill scoverage.scoverage.xmlReportAll
+        run: ./mill scoverage.xmlReportAll
 
       - name: Upload report to Codecov
         uses: codecov/codecov-action@v5
