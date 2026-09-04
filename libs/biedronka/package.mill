@@ -1,0 +1,19 @@
+package build.libs.biedronka
+
+import mill.*, scalalib.*
+
+object `package` extends build.MyModule {
+  override def mvnDeps = super.mvnDeps() ++ Seq(
+    mvn"org.apache.commons:commons-lang3:3.20.0",
+    mvn"org.apache.httpcomponents.client5:httpclient5:5.2.1",
+    mvn"io.circe::circe-core:0.14.6",
+    mvn"io.circe::circe-generic:0.14.6",
+    mvn"io.circe::circe-parser:0.14.6"
+  )
+
+  object test extends MyTestModule {
+    override def moduleDeps: Seq[JavaModule] =
+      super.moduleDeps ++ Seq(build.libs.wiremockTestkit)
+  }
+
+}
