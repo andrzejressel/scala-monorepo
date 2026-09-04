@@ -50,3 +50,18 @@ jobs:
         with:
           files: out/scoverage/xmlReportAll.dest/scoverage.xml
           fail_ci_if_error: true
+
+  notify-success:
+    name: notify-success
+    if: ${{ always() }}
+    needs:
+      - compile-test-coverage
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Verify all prerequisite jobs succeeded
+        run: |
+          if [[ "${{ needs.compile-test-coverage.result }}" != "success" ]]; then
+            echo "compile-test-coverage did not succeed: ${{ needs.compile-test-coverage.result }}"
+            exit 1
+          fi
+          echo "All prerequisite jobs succeeded."
