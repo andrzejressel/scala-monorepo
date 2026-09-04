@@ -61,25 +61,5 @@ jobs:
       - compile-test-coverage
     runs-on: ubuntu-24.04
     steps:
-      - name: Verify all prerequisite jobs succeeded
-        env:
-          NEEDS_JSON: ${{ toJson(needs) }}
-        run: |
-          python - <<'PY'
-          import json
-          import os
-          import sys
-
-          needs = json.loads(os.environ["NEEDS_JSON"])
-          failed = {
-              job_name: job_data.get("result")
-              for job_name, job_data in needs.items()
-              if job_data.get("result") != "success"
-          }
-
-          if failed:
-              print(f"Some prerequisite jobs did not succeed: {failed}")
-              sys.exit(1)
-
-          print("All prerequisite jobs succeeded.")
-          PY
+      - name: Check prerequisites
+        run: test "${{ needs.compile-test-coverage.result }}" = "success"
