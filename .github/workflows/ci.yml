@@ -8,23 +8,53 @@ on:
 
 jobs:
   compile-test-coverage:
-    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: linux
+            arch: amd64
+            runner: ubuntu-latest
+            mill_command: ./mill
+          - os: linux
+            arch: arm64
+            runner: ubuntu-24.04-arm
+            mill_command: ./mill
+          - os: windows
+            arch: amd64
+            runner: windows-latest
+            mill_command: .\mill.bat
+          - os: windows
+            arch: arm64
+            runner: windows-11-arm
+            mill_command: .\mill.bat
+          - os: macos
+            arch: arm64
+            runner: macos-14
+            mill_command: ./mill
+    runs-on: ${{ matrix.runner }}
     permissions:
       contents: read
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Make Mill executable
+        if: matrix.os != 'windows'
+        run: chmod +x mill
+
       - name: Compile all modules
-        run: ./mill __.compile
+        run: ${{ matrix.mill_command }} __.compile
 
       - name: Run tests
-        run: ./mill __.test
+        run: ${{ matrix.mill_command }} __.test
 
       - name: Generate aggregated scoverage XML report
-        run: ./mill scoverage.xmlReportAll
+        if: matrix.os == 'linux' && matrix.arch == 'amd64'
+        run: ${{ matrix.mill_command }} scoverage.xmlReportAll
 
       - name: Upload report to Codecov
+        if: matrix.os == 'linux' && matrix.arch == 'amd64'
         uses: codecov/codecov-action@v5
         with:
           files: out/scoverage/xmlReportAll.dest/scoverage.xml
