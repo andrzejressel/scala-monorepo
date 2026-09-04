@@ -21,9 +21,10 @@ jobs:
           - os: windows
             arch: amd64
             runner: windows-2025
-          - os: windows
-            arch: arm64
-            runner: windows-11-arm
+          # No temurin support
+          # - os: windows
+          #   arch: arm64
+          #   runner: windows-11-arm
           - os: macos
             arch: amd64
             runner: macos-26-intel
