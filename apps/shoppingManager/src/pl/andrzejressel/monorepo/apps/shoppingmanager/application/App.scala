@@ -6,9 +6,11 @@ import scalafx.scene.Scene
 import scalafx.scene.layout.VBox
 import scalafx.scene.text.Text
 
+import scala.language.adhocExtensions
+
 object App extends JFXApp3 {
   override def start(): Unit =
-    stage = new JFXApp3.PrimaryStage:
+    stage = new JFXApp3.PrimaryStage {
       title = "Shopping Manager"
       width = 800
       height = 600
@@ -23,4 +25,5 @@ object App extends JFXApp3 {
           )
         }
       }
+    }
 }

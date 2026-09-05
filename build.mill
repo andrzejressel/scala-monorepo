@@ -37,7 +37,8 @@ trait MyModule extends ScalaModule with ScoverageModule with ScalafixModule {
     "-source:future",
     "-Wunused:all",
     "-encoding",
-    "utf8"
+    "utf8",
+    "-feature"
   ) ++ ciScalacOptions()
 
   trait MyTestModule
