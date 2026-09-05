@@ -1,6 +1,8 @@
 package pl.andrzejressel.monorepo.libs.database
 
-import org.flywaydb.core.api.migration.{BaseJavaMigration, Context, JavaMigration}
+import org.flywaydb.core.api.migration.BaseJavaMigration
+import org.flywaydb.core.api.migration.Context
+import org.flywaydb.core.api.migration.JavaMigration
 
 class DatabaseTest extends munit.FunSuite {
 
@@ -22,7 +24,9 @@ class DatabaseTest extends munit.FunSuite {
     val conn = ds.getConnection()
 
     val stmt = conn.createStatement()
-    val rs = stmt.executeQuery("SELECT name FROM sqlite_master WHERE type='table' AND name='test_table';")
+    val rs = stmt.executeQuery(
+      "SELECT name FROM sqlite_master WHERE type='table' AND name='test_table';"
+    )
     assert(rs.next(), "Table 'test_table' should exist after migration")
 
   }
@@ -36,10 +40,11 @@ class DatabaseTest extends munit.FunSuite {
   private object V1__TestMigration extends BaseJavaMigration {
     override def migrate(connection: Context): Unit = {
       val stmt = connection.getConnection.createStatement()
-      stmt.execute("CREATE TABLE test_table (id INTEGER PRIMARY KEY, name TEXT)")
+      stmt.execute(
+        "CREATE TABLE test_table (id INTEGER PRIMARY KEY, name TEXT)"
+      )
     }
 
   }
-
 
 }

@@ -1,5 +1,5 @@
 //| mill-version: 1.1.8
-//| mill-jvm-version: temurin:26.0.1
+//| mill-jvm-version: liberica-full:26.0.1
 //| mill-jvm-index-version: latest.release
 //| mvnDeps: ["com.goyeau::mill-scalafix::0.6.2", "com.lihaoyi::mill-contrib-scoverage:$MILL_VERSION"]
 
@@ -17,7 +17,7 @@ trait MyModule extends ScalaModule with ScoverageModule with ScalafixModule {
 
   override def scoverageVersion: T[String] = "2.5.2"
 
-  override def jvmVersion: T[String] = "temurin:26.0.1"
+  override def jvmVersion: T[String] = "liberica-full:26.0.1"
 
   override def jvmIndexVersion: T[String] = "latest.release"
 

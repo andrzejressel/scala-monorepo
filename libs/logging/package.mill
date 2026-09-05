@@ -11,6 +11,5 @@ object `package` extends build.MyModule {
     logbackClassic
   )
 
-  object test extends MyTestModule {
-  }
+  object test extends MyTestModule {}
 }
