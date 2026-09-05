@@ -26,9 +26,6 @@ jobs:
           #   arch: arm64
           #   runner: windows-11-arm
           - os: macos
-            arch: amd64
-            runner: macos-26-intel
-          - os: macos
             arch: arm64
             runner: macos-26 
     runs-on: ${{ matrix.runner }}
