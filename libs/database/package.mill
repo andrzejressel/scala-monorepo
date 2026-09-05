@@ -1,0 +1,15 @@
+package build.libs.database
+
+import mill.*, scalalib.*
+
+object `package` extends build.MyModule {
+  override def mvnDeps = super.mvnDeps() ++ Seq(
+    mvn"org.xerial:sqlite-jdbc:3.53.2.1",
+    mvn"org.flywaydb:flyway-core:13.2.0"
+  )
+
+  override def moduleDeps: Seq[JavaModule] =
+    super.moduleDeps ++ Seq(build.libs.logging)
+
+  object test extends MyTestModule {}
+}

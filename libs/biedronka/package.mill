@@ -13,7 +13,7 @@ object `package` extends build.MyModule {
 
   object test extends MyTestModule {
     override def moduleDeps: Seq[JavaModule] =
-      super.moduleDeps ++ Seq(build.libs.wiremockTestkit)
+      super.moduleDeps ++ Seq(build.libs.wiremockTestkit, build.libs.logging)
   }
 
 }

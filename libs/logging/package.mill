@@ -1,0 +1,16 @@
+package build.libs.logging
+
+import mill.*, scalalib.*
+
+val slf4jApi = mvn"org.slf4j:slf4j-api:2.0.18"
+val logbackClassic = mvn"ch.qos.logback:logback-classic:1.6.1"
+
+object `package` extends build.MyModule {
+  override def mvnDeps = super.mvnDeps() ++ Seq(
+    slf4jApi,
+    logbackClassic
+  )
+
+  object test extends MyTestModule {
+  }
+}
