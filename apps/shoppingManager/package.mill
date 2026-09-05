@@ -1,1 +1,9 @@
 package build.apps.shoppingManager
+
+import mill.*, scalalib.*
+
+object `package` extends build.MyModule {
+  override def mvnDeps: T[Seq[Dep]] = super.mvnDeps() ++ Seq(
+    mvn"org.scalafx::scalafx:26.0.0-R38",
+  )
+}
