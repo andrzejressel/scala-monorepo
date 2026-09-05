@@ -52,7 +52,6 @@ jobs:
           fail_ci_if_error: true
 
   notify-success:
-    name: notify-success
     needs:
       - compile-test-coverage
     runs-on: ubuntu-slim
