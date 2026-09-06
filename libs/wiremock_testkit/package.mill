@@ -1,4 +1,4 @@
-package build.libs.wiremockTestkit
+package build.libs.wiremock_testkit
 
 import mill.*, scalalib.*
 
