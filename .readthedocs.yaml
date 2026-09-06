@@ -4,13 +4,14 @@ build:
   os: ubuntu-24.04
   tools:
     python: "3.13"
-  build:
-    html:
-      - zensical build
-  post_build:
-    # Copy the built site into the directory Read the Docs publishes.
-    - mkdir -p $READTHEDOCS_OUTPUT/html/
-    - cp --recursive site/* $READTHEDOCS_OUTPUT/html/
+  jobs:
+    build:
+      html:
+        - zensical build
+    post_build:
+      # Copy the built site into the directory Read the Docs publishes.
+      - mkdir -p $READTHEDOCS_OUTPUT/html/
+      - cp --recursive site/* $READTHEDOCS_OUTPUT/html/
 
 python:
   install:
