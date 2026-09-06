@@ -7,4 +7,6 @@ object `package` extends build.MyModule {
     mvn"org.wiremock:wiremock::3.13.2",
     mvn"org.scalameta::munit:1.3.4"
   )
+
+  object test extends MyTestModule
 }
