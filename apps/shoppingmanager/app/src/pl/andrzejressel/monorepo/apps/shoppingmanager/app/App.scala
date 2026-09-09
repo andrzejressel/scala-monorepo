@@ -1,4 +1,4 @@
-package pl.andrzejressel.monorepo.apps.shoppingmanager.application
+package pl.andrzejressel.monorepo.apps.shoppingmanager.app
 
 import scalafx.application.JFXApp3
 import scalafx.geometry.Pos

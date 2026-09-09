@@ -1,4 +1,4 @@
-package build.apps.shoppingManager
+package build.apps.shoppingmanager.app
 
 import mill.*, scalalib.*
 
