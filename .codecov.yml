@@ -6,3 +6,6 @@ coverage:
     patch:
       default:
         informational: true
+ignore:
+  - apps/shoppingmanager/database/generated
+  - apps/shoppingmanager/database/jooqgen

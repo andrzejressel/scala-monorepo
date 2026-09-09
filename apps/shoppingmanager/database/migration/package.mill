@@ -6,4 +6,6 @@ object `package` extends build.MyModule {
   override def moduleDeps: Seq[JavaModule] = super.moduleDeps ++ Seq(
     build.libs.database
   )
+
+  object test extends MyTestModule
 }
