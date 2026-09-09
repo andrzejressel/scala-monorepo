@@ -24,9 +24,9 @@ class MigrationTest extends munit.FunSuite {
 
     val stmt = conn.createStatement()
     val rs = stmt.executeQuery(
-      "SELECT name FROM sqlite_master WHERE type='table' AND name='test_table';"
+      "SELECT name FROM sqlite_master WHERE type='table' AND name='categories';"
     )
-    assert(rs.next(), "Table 'test_table' should exist after migration")
+    assert(rs.next(), "Table 'categories' should exist after migration")
 
   }
 
