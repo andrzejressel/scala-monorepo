@@ -1,0 +1,9 @@
+package build.apps.shoppingmanager.database.migration
+
+import mill.*, scalalib.*
+
+object `package` extends build.MyModule {
+  override def moduleDeps: Seq[JavaModule] = super.moduleDeps ++ Seq(
+    build.libs.database
+  )
+}

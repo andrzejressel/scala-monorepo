@@ -1,0 +1,16 @@
+package build.apps.shoppingmanager.database.generated
+
+import mill.*, scalalib.*
+
+object `package` extends build.MyModule {
+
+  override def mvnDeps = super.mvnDeps() ++ Seq(
+    mvn"org.jooq:jooq:3.21.7"
+  )
+
+  override def scalacOptions: T[Seq[String]] = super.scalacOptions() ++ Seq(
+    "-new-syntax",
+    "-rewrite"
+  )
+
+}
