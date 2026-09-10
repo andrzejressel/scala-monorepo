@@ -1,8 +1,8 @@
 package pl.andrzejressel.monorepo.libs.jooqgen
 
-import org.jooq.codegen.GenerationTool
-import org.jooq.meta.jaxb.Configuration
-import org.jooq.meta.jaxb.Generator
+import org.jooq.codegen.{GenerationTool, Scala3Generator}
+import org.jooq.meta.jaxb.{Configuration, Generator, Strategy}
+import org.jooq.meta.sqlite.SQLiteDatabase
 import pl.andrzejressel.monorepo.libs.database.DatabaseConfig
 import pl.andrzejressel.monorepo.libs.database.DatabaseSource
 import pl.andrzejressel.monorepo.libs.database.MigrationList
@@ -15,16 +15,18 @@ object JooqGenerator {
 
   def generateToPwd(
       packageName: String,
-      migrationList: MigrationList
+      migrationList: MigrationList,
+      strategy: Option[Strategy] = None
   ): Unit = {
     val destination = Paths.get(".").toAbsolutePath
-    generate(packageName, migrationList, destination)
+    generate(packageName, migrationList, destination, strategy)
   }
 
-  def generate(
+  private[jooqgen] def generate(
       packageName: String,
       migrationList: MigrationList,
-      destination: Path
+      destination: Path,
+      strategy: Option[Strategy]
   ): Unit = {
 
     val tempDir = Files.createTempDirectory("jooqgen")
@@ -40,13 +42,13 @@ object JooqGenerator {
     val conf = Configuration()
       .withGenerator(
         Generator()
+          .withStrategy(strategy.orNull)
           .withDatabase(
             org.jooq.meta.jaxb
               .Database()
-              .withName("org.jooq.meta.sqlite.SQLiteDatabase")
+              .withName(classOf[SQLiteDatabase].getName)
               .withIncludes(".*")
-              .withExcludes("")
-//              .withInputSchema("main")
+              .withExcludes("flyway_schema_history")
           )
           .withTarget(
             org.jooq.meta.jaxb
@@ -58,7 +60,7 @@ object JooqGenerator {
                 destination.toString
               )
           )
-          .withName("org.jooq.codegen.Scala3Generator")
+          .withName(classOf[Scala3Generator].getName)
           .withGenerate(
             org.jooq.meta.jaxb
               .Generate()

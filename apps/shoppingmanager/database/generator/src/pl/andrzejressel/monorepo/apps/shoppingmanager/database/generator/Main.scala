@@ -1,5 +1,6 @@
-package pl.andrzejressel.monorepo.apps.shoppingmanager.database
+package pl.andrzejressel.monorepo.apps.shoppingmanager.database.generator
 
+import org.jooq.meta.jaxb.Strategy
 import pl.andrzejressel.monorepo.apps.shoppingmanager.database.migration.ShoppingManagerMigrationList
 import pl.andrzejressel.monorepo.libs.jooqgen.JooqGenerator
 
@@ -7,7 +8,11 @@ object Main {
   def main(args: Array[String]): Unit = {
     JooqGenerator.generateToPwd(
       "pl.andrzejressel.monorepo.apps.shoppingmanager.database.jooq",
-      ShoppingManagerMigrationList
+      ShoppingManagerMigrationList,
+      strategy = Some(
+        new Strategy()
+          .withName(classOf[SelfReferenceAwareGeneratorStrategy].getName)
+      )
     )
   }
 }

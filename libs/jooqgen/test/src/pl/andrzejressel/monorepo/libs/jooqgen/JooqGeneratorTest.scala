@@ -11,7 +11,7 @@ class JooqGeneratorTest extends munit.FunSuite {
   test("Should generate JOOQ classes") {
     val packageName = "pl.andrzejressel.monorepo.libs.jooqgen.generated"
     val tempDir = Files.createTempDirectory("jooqgen")
-    JooqGenerator.generate(packageName, TestMigrationList, tempDir)
+    JooqGenerator.generate(packageName, TestMigrationList, tempDir, None)
 
     assert(
       Files.exists(
