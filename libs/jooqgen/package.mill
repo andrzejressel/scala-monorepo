@@ -1,0 +1,17 @@
+package build.libs.jooqgen
+
+import mill.*, scalalib.*
+
+object `package` extends build.MyModule {
+
+  override def mvnDeps = super.mvnDeps() ++ Seq(
+    mvn"org.jooq:jooq-codegen:3.21.7"
+  )
+
+  override def moduleDeps: Seq[JavaModule] = super.moduleDeps ++ Seq(
+    build.libs.database
+  )
+
+  object test extends MyTestModule
+
+}

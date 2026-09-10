@@ -1,0 +1,11 @@
+package build.apps.shoppingmanager.database.repository
+
+import mill.*, scalalib.*
+
+object `package` extends build.MyModule {
+  override def moduleDeps: Seq[JavaModule] = super.moduleDeps ++ Seq(
+    build.apps.shoppingmanager.database.generated
+  )
+
+  object test extends MyTestModule
+}

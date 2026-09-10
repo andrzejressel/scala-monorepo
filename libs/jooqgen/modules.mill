@@ -1,0 +1,30 @@
+package build.libs.jooqgen
+
+import mill.*, scalalib.*
+
+trait GeneratorModule extends build.MyModule {
+  override def moduleDeps: Seq[JavaModule] = super.moduleDeps ++ Seq(
+    build.libs.jooqgen
+  )
+}
+
+trait GeneratedModule extends build.MyModuleWithoutFormatting {
+
+  val generator: GeneratorModule
+
+  // JOOQ generated code does not work with "-source:future"
+  override def scalacOptions: T[Seq[String]] = Seq()
+
+  override def sources: T[Seq[PathRef]] = Task {
+    generator.runner().run(args = Seq())
+    Seq(PathRef(Task.dest))
+  }
+
+  override def mvnDeps = super.mvnDeps() ++ Seq(
+    mvn"org.jooq:jooq:3.21.7"
+  )
+
+  override def moduleDeps: Seq[JavaModule] = super.moduleDeps ++ Seq(
+    build.libs.database
+  )
+}
