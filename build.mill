@@ -56,6 +56,10 @@ trait MyModuleWithoutFormatting extends ScalaModule {
 
 }
 
+trait MyAppModule extends MyModule with JpackageModule {
+
+}
+
 object scoverage extends ScoverageReport {
   override def scalaVersion = "3.9.0"
 

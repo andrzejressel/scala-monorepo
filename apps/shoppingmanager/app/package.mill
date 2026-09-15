@@ -2,8 +2,13 @@ package build.apps.shoppingmanager.app
 
 import mill.*, scalalib.*
 
-object `package` extends build.MyModule {
+object `package` extends build.MyAppModule {
+  override def mainClass: T[Option[String]] = Some("pl.andrzejressel.monorepo.apps.shoppingmanager.app.App")
   override def mvnDeps: T[Seq[Dep]] = super.mvnDeps() ++ Seq(
     mvn"org.scalafx::scalafx:26.0.0-R38".excludeOrg("org.openjfx")
+  )
+
+  override def moduleDeps: Seq[JavaModule] = super.moduleDeps ++ Seq(
+    build.apps.shoppingmanager.database.generated
   )
 }
