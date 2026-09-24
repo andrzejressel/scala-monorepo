@@ -46,13 +46,13 @@ jobs:
         run: ./mill scoverage.xmlReportAll
 
       - name: Upload report to Codecov
-        uses: codecov/codecov-action@0b35c9ecc4f0529d0eb674914510c22f85b196b4 # v7.1.0
+        uses: codecov/codecov-action@303a32d7a59b442fa8d48b6a1cc6825c09c847a5 # v7.1.1
         with:
           files: out/scoverage/xmlReportAll.dest/scoverage.xml
           fail_ci_if_error: true
 
       - name: Upload test results to Codecov
-        uses: codecov/codecov-action@0b35c9ecc4f0529d0eb674914510c22f85b196b4 # v7.1.0
+        uses: codecov/codecov-action@303a32d7a59b442fa8d48b6a1cc6825c09c847a5 # v7.1.1
         with:
           # https://github.com/codecov/codecov-action/issues/1728#issuecomment-2671077436
           files: "\"out/**/testForked.dest/test-report.xml\""
